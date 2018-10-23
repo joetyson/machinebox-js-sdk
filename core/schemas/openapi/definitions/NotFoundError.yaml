@@ -1,0 +1,10 @@
+    title: NotFoundError
+    type: object
+    properties:
+      success:
+        type: boolean
+      error:
+        type: string
+    required:
+      - success
+      - error

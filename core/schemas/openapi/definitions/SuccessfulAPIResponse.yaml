@@ -1,0 +1,5 @@
+title: SuccessfulAPIResponse
+type: object
+properties:
+  successs:
+    type: boolean

@@ -1,0 +1,23 @@
+{
+  "name": "@mbx/sdk-monorepo",
+  "version": "1.0.0-monorepo",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Run tests from root\" && exit 1"
+  },
+  "workspaces": [
+    "./apis/*",
+    "./core/*"
+  ],
+  "dependencies": {
+     "@mbx/tagbox-api": "file:apis/mbx-tagbox",
+     "@mbx/classificationbox-api": "file:apis/mbx-classificationbox",
+     "@mbx/schemas": "file:core/schemas"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.9",
+    "@types/promise": "^7.1.30",
+    "lerna": "^3.4.3",
+    "typescript": "^2.4"
+  }
+}

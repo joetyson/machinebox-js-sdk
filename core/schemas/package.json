@@ -1,0 +1,37 @@
+{
+  "name": "@mbx/schemas",
+  "version": "1.0.0",
+  "description": "OpenAPI Schemas for Machinebox",
+  "keywords": [
+    "machinebox",
+    "machinebox-javascript-sdk"
+  ],
+  "author": "Joe Tyson <joe@joetyson.me>",
+  "homepage": "https://github.com/joetyson/machinebox-js-sdk#readme",
+  "license": "Apache-2.0",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joetyson/machinebox-js-sdk.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "codegen": "run codegen:all && lerna exec --scope '@mbx/*-api' -- yarn build"
+  },
+  "bugs": {
+    "url": "https://github.com/joetyson/machinebox-js-sdk/issues"
+  },
+  "devDependencies": {
+    "runjs": "^4.3.2",
+    "swagger-cli": "^2.1.3"
+  }
+}

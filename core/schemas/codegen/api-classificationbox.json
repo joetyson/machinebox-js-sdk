@@ -1,0 +1,17 @@
+{
+  "enablePostProcessFile": true,
+  "ensureUniqueParams": true,
+  "gitRepoId": "machinebox-js-sdk",
+  "gitUserId": "joetyson",
+  "httpUserAgent": "Machinebox-SDK",
+  "invokerPackage": "mbx",
+  "modelPackage": "Classification",
+  "modelPropertyNaming": "camelCase",
+  "npmName": "@mbx/classificationbox-api",
+  "npmRepository": "https://github.com/joetyson/machinebox-js-sdk",
+  "removeOperationIdPrefix": true,
+  "sortParamsByRequiredFlag": true,
+  "supportsES6": true,
+  "usePromises": true,
+  "withInterfaces": true
+}

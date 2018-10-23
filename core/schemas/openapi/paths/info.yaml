@@ -1,0 +1,26 @@
+get:
+  operationId: GetBoxInfo
+  summary: GetBoxInfo
+  description: Returns some basic details about the box.
+  tags:
+    - Metadata
+  consumes:
+    - application/json
+  responses:
+    '200':
+      description: Resposne from box.
+      schema:
+        type: object
+        properties:
+          success:
+            type: boolean
+          name:
+            type: string
+          version:
+            type: number
+          build:
+            type: string
+          status:
+            type: string
+          plan:
+            type: string
