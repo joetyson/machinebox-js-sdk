@@ -1,0 +1,81 @@
+{
+  "definitions": {
+    "checkTextBodySentenceItems": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "example": "I really love Machina, who is the MachineBox mascot designed by Ashley McNamara."
+        },
+        "start": {
+          "type": "number",
+          "example": 0
+        },
+        "end": {
+          "type": "number",
+          "example": 80
+        },
+        "sentiment": {
+          "type": "number",
+          "example": 0.7128883004188538
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "example": "Machina"
+              },
+              "start": {
+                "type": "number",
+                "example": 14
+              },
+              "end": {
+                "type": "number",
+                "example": 21
+              },
+              "type": {
+                "type": "string",
+                "example": "person"
+              }
+            }
+          }
+        }
+      }
+    },
+    "checkTextBody": {
+      "required": [
+        "success",
+        "sentences",
+        "keywords"
+      ],
+      "type": "objecg",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "keyword": {
+                "type": "string",
+                "example": "ashley mcnamara"
+              }
+            }
+          }
+        },
+        "sentences": {
+          "type": "array",
+          "items": {
+            "ref": "#/definitions/checkTextBodySentenceItems"
+          }
+        }
+      }
+    }
+  }
+}
