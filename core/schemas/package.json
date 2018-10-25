@@ -33,5 +33,8 @@
   "devDependencies": {
     "runjs": "^4.3.2",
     "swagger-cli": "^2.1.3"
+  },
+  "dependencies": {
+    "js-yaml": "^3.12.0"
   }
 }

@@ -1,0 +1,141 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Classificationbox",
+    "version": "1.0.1",
+    "description": "ClassificationBox API descriptors (unofficial)",
+    "contact": {
+      "name": "Joe Tyson",
+      "url": "https://github.com/joetyson/machinebox-openapi"
+    },
+    "license": {
+      "name": "Apache License 2.0"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/info": {
+      "get": {
+        "operationId": "GetBoxInfo",
+        "summary": "GetBoxInfo",
+        "description": "Returns some basic details about the box.",
+        "tags": [
+          "Metadata"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposne from box.",
+            "schema": {
+              "name": "getBoxInfoResponse",
+              "type": "object",
+              "properties": {
+                "build": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "plan": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "version": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SuccessfulAPIResponse": {
+      "title": "SuccessfulAPIResponse",
+      "type": "object",
+      "properties": {
+        "successs": {
+          "type": "boolean"
+        }
+      }
+    },
+    "UnexpectedError": {
+      "title": "UnexpectedError",
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "success",
+        "error"
+      ]
+    },
+    "UnauthorizedError": {
+      "title": "UnauthorizedError",
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "success",
+        "error"
+      ]
+    },
+    "NotFoundError": {
+      "title": "NotFoundError",
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "success",
+        "error"
+      ]
+    }
+  }
+}
+

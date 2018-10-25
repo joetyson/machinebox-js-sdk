@@ -1,0 +1,720 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Tagbox API",
+    "version": "1.0.1",
+    "description": "Tagbox API descriptors (unofficial)",
+    "contact": {
+      "name": "Joe Tyson",
+      "url": "https://github.com/joetyson/machinebox-openapi"
+    },
+    "license": {
+      "name": "Apache License 2.0"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/info": {
+      "get": {
+        "operationId": "GetBoxInfo",
+        "summary": "GetBoxInfo",
+        "description": "Returns some basic details about the box.",
+        "tags": [
+          "Metadata"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposne from box.",
+            "schema": {
+              "name": "getBoxInfoResponse",
+              "type": "object",
+              "properties": {
+                "build": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "plan": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "version": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tagbox/check": {
+      "post": {
+        "description": "Get tags for a specified image",
+        "operationId": "CheckImage",
+        "summary": "CheckImage",
+        "tags": [
+          "Tagbox"
+        ],
+        "parameters": [
+          {
+            "name": "CheckImageRequest",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CheckImageRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Tags for the specified image",
+            "schema": {
+              "$ref": "#/definitions/CheckApiResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Unable to find Resource",
+            "schema": {
+              "$ref": "#/definitions/NotFoundError"
+            }
+          },
+          "500": {
+            "description": "Unknown Error",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/tagbox/similar": {
+      "x-tags": [
+        "Tagbox"
+      ],
+      "get": {
+        "description": "Returns similar images based on the ID provided",
+        "operationId": "SimilarID",
+        "summary": "SimilarID",
+        "tags": [
+          "Tagbox"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Format - double.",
+            "type": "number",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Similar images from Tagbox",
+            "schema": {
+              "$ref": "#/definitions/SimilarApiResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Unable to find Resource",
+            "schema": {
+              "$ref": "#/definitions/NotFoundError"
+            }
+          },
+          "500": {
+            "description": "Unknown Error",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "post": {
+        "description": "Checks the image at the specified source for similar images based on tags previously taught.",
+        "operationId": "SimilarImage",
+        "summary": "SimilarImage",
+        "tags": [
+          "Tagbox"
+        ],
+        "parameters": [
+          {
+            "name": "SimilarImageRequest",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SimilarImageRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Similar images from Tagbox",
+            "schema": {
+              "$ref": "#/definitions/SimilarApiResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Unable to find Resource",
+            "schema": {
+              "$ref": "#/definitions/NotFoundError"
+            }
+          },
+          "500": {
+            "description": "Unknown Error",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/tagbox/rename/{id}": {
+      "x-tags": [
+        "Tagbox"
+      ],
+      "post": {
+        "description": "Get tags for a specified image",
+        "operationId": "RenameAll",
+        "summary": "RenameAll",
+        "tags": [
+          "Tagbox"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful API Response",
+            "schema": {
+              "$ref": "#/definitions/SuccessfulAPIResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Unable to find Resource",
+            "schema": {
+              "$ref": "#/definitions/NotFoundError"
+            }
+          },
+          "500": {
+            "description": "Unknown Error",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the item to patch",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "RenameAllRequest",
+            "schema": {
+              "$ref": "#/definitions/RenameAllRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "Successful API Response",
+            "schema": {
+              "$ref": "#/definitions/SuccessfulAPIResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Unable to find Resource",
+            "schema": {
+              "$ref": "#/definitions/NotFoundError"
+            }
+          },
+          "500": {
+            "description": "Unknown Error",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          }
+        },
+        "summary": "RenameTagByID",
+        "tags": [
+          "Tagbox"
+        ],
+        "operationId": "RenameTagByID",
+        "description": "Get tags for a specified image",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the item to patch",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/PatchTagRequest"
+            },
+            "x-examples": {
+              "application/json": {
+                "tag": "more shiny tag"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/tagbox/teach": {
+      "x-tags": [
+        "Tagbox"
+      ],
+      "post": {
+        "description": "Use the /tagbox/teach endpoint to teach Tagbox a tag",
+        "operationId": "TeachCustomTag",
+        "summary": "TeachCustomTag",
+        "tags": [
+          "Tagbox"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/TeachCustomTagRequest"
+            },
+            "description": "Teach TagBot about a tag in a specified image",
+            "x-examples": {
+              "application/json": {
+                "id": "optional-id",
+                "tag": "labore nostrud",
+                "url": "https://mysite.com/magic.png"
+              }
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful API Response",
+            "schema": {
+              "$ref": "#/definitions/SuccessfulAPIResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Unable to find Resource",
+            "schema": {
+              "$ref": "#/definitions/NotFoundError"
+            }
+          },
+          "500": {
+            "description": "Unknown Error",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/tagbox/teach/{id}": {
+      "x-tags": [
+        "Tagbox"
+      ],
+      "delete": {
+        "description": "Remove a tag that has been previously taught",
+        "operationId": "Remove",
+        "summary": "Remove",
+        "tags": [
+          "Tagbox"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the item to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful API Response",
+            "schema": {
+              "$ref": "#/definitions/SuccessfulAPIResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Unable to find Resource",
+            "schema": {
+              "$ref": "#/definitions/NotFoundError"
+            }
+          },
+          "500": {
+            "description": "Unknown Error",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "SuccessfulAPIResponse": {
+      "title": "SuccessfulAPIResponse",
+      "type": "object",
+      "properties": {
+        "successs": {
+          "type": "boolean"
+        }
+      }
+    },
+    "UnexpectedError": {
+      "title": "UnexpectedError",
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "success",
+        "error"
+      ]
+    },
+    "UnauthorizedError": {
+      "title": "UnauthorizedError",
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "success",
+        "error"
+      ]
+    },
+    "NotFoundError": {
+      "title": "NotFoundError",
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "success",
+        "error"
+      ]
+    },
+    "CheckApiResponse": {
+      "title": "CheckApiResponse",
+      "type": "object",
+      "properties": {
+        "success": {
+          "description": "",
+          "type": "boolean"
+        },
+        "tags": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StandardTagScore"
+          }
+        },
+        "custom_tags": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomTagScore"
+          }
+        }
+      }
+    },
+    "StandardTagScore": {
+      "title": "StandardTagScore",
+      "type": "object",
+      "properties": {
+        "tag": {
+          "description": "Tag within Tagbox",
+          "type": "string"
+        },
+        "confidence": {
+          "description": "",
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "tag",
+        "confidence"
+      ]
+    },
+    "CustomTagScore": {
+      "title": "CustomTagScore",
+      "type": "object",
+      "properties": {
+        "tag": {
+          "description": "Tag within Tagbox",
+          "type": "string"
+        },
+        "confidence": {
+          "description": "",
+          "type": "number",
+          "format": "double"
+        },
+        "id": {
+          "description": "ID within Tagbox",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tag",
+        "confidence",
+        "id"
+      ]
+    },
+    "SimilarApiResponse": {
+      "title": "SimilarApiResponse",
+      "type": "object",
+      "properties": {
+        "successs": {
+          "description": "",
+          "type": "boolean"
+        },
+        "tagsCount": {
+          "description": "",
+          "type": "number",
+          "format": "double"
+        },
+        "similar": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomTagScore"
+          }
+        }
+      }
+    },
+    "CheckImageRequest": {
+      "type": "object",
+      "title": "CheckImageRequest",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 1,
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": ""
+        },
+        "base64": {
+          "type": "string",
+          "format": "base64"
+        }
+      }
+    },
+    "SimilarImageRequest": {
+      "type": "object",
+      "title": "SimilarImageRequest",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 2,
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "limit": {
+          "type": "number",
+          "default": 10
+        },
+        "base64": {
+          "type": "string",
+          "format": "base64"
+        }
+      }
+    },
+    "RenameAllRequest": {
+      "title": "RenameAllRequest",
+      "type": "object",
+      "properties": {
+        "from": {
+          "description": "",
+          "type": "string"
+        },
+        "to": {
+          "description": "",
+          "type": "string"
+        }
+      }
+    },
+    "TeachCustomTagRequest": {
+      "title": "TeachCustomTagRequest",
+      "type": "object",
+      "properties": {
+        "tag": {
+          "description": "Tag within Tagbox",
+          "type": "string"
+        },
+        "id": {
+          "description": "ID within Tagbox",
+          "type": "string"
+        },
+        "url": {
+          "description": "URL to an image",
+          "type": "string"
+        },
+        "base64": {
+          "description": "Base64 encoded image",
+          "type": "string",
+          "format": "base64"
+        }
+      },
+      "required": [
+        "tag"
+      ]
+    },
+    "PatchTagRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tag": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "tag"
+      ],
+      "title": "PatchTagRequest"
+    }
+  }
+}
+
