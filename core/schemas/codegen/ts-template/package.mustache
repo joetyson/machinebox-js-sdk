@@ -1,12 +1,12 @@
 {
   "name": "{{npmName}}",
   "version": "{{npmVersion}}",
-  "description": "OpenAPI client for {{npmName}}",
-  "author": "OpenAPI-Generator Contributors",
+  "description": "Core REST Client {{appName}}",
+  "author": "Joe Tyson @joetyson",
   "keywords": [
     "{{npmName}}"
   ],
-  "license": "Unlicense",
+  "license": "Apache-2.0",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "scripts" : {
@@ -16,11 +16,11 @@
   "dependencies": {
     "axios": "^0.18.0"
   },
-  "peerDependencies": {    
+  "peerDependencies": {
   },
   "devDependencies": {
-    "@types/node": "^8.0.9",
-    "typescript": "^2.4" 
+    "@types/node": "^10.12.0",
+    "typescript": "^2.4"
   }{{#npmRepository}},{{/npmRepository}}
 {{#npmRepository}}
   "publishConfig":{

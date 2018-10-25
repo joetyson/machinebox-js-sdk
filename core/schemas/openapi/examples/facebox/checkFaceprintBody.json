@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "faceprints": [{
+      "id": "j1",
+      "name": "John Lennon",
+      "matched": true,
+      "confidence": 0.982
+    },
+    {
+      "matched": false,
+      "confidence": 0
+    }
+  ]
+}

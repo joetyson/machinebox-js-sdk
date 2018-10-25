@@ -1,0 +1,14 @@
+type: object
+properties:
+  build:
+    type: string
+  name:
+    type: string
+  plan:
+    type: string
+  status:
+    type: string
+  success:
+    type: boolean
+  version:
+    type: number

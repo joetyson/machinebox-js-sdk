@@ -1,31 +1,8 @@
-swagger: '2.0'
+$include: ./_base.yaml
 info:
   title: Tagbox API
-  version: "1.0.1"
   description: Tagbox API descriptors (unofficial)
-  contact:
-    name: Joe Tyson
-    url: 'https://github.com/joetyson/machinebox-openapi'
-  license:
-    name: Apache License 2.0
-host: localhost:8080
-basePath: /
-schemes:
-  - http
-  - https
-securityDefinitions:
-  basicAuth:
-    type: basic
-security:
-  - basicAuth: []
-consumes:
-  - application/json
-produces:
-  - application/json
-
 paths:
-  /info:
-    $ref: ./paths/info.yaml
   /tagbox/check:
     post:
       description: Get tags for a specified image
@@ -45,18 +22,7 @@ paths:
           description: Tags for the specified image
           schema:
             $ref: '#/definitions/CheckApiResponse'
-        '401':
-          description: 'Unauthorized Access'
-          schema:
-            $ref: '#/definitions/UnauthorizedError'
-        '404':
-          description: 'Unable to find Resource'
-          schema:
-            $ref: '#/definitions/NotFoundError'
-        '500':
-          description: 'Unknown Error'
-          schema:
-            $ref: '#/definitions/UnexpectedError'
+        $include: ./partials/_errors.yaml
       produces:
         - application/json
   /tagbox/similar:
@@ -84,18 +50,7 @@ paths:
           description: Similar images from Tagbox
           schema:
             $ref: '#/definitions/SimilarApiResponse'
-        '401':
-          description: 'Unauthorized Access'
-          schema:
-            $ref: '#/definitions/UnauthorizedError'
-        '404':
-          description: 'Unable to find Resource'
-          schema:
-            $ref: '#/definitions/NotFoundError'
-        '500':
-          description: 'Unknown Error'
-          schema:
-            $ref: '#/definitions/UnexpectedError'
+        $include: ./partials/_errors.yaml
       produces:
         - application/json
       consumes:
@@ -118,18 +73,7 @@ paths:
           description: Similar images from Tagbox
           schema:
             $ref: '#/definitions/SimilarApiResponse'
-        '401':
-          description: 'Unauthorized Access'
-          schema:
-            $ref: '#/definitions/UnauthorizedError'
-        '404':
-          description: 'Unable to find Resource'
-          schema:
-            $ref: '#/definitions/NotFoundError'
-        '500':
-          description: 'Unknown Error'
-          schema:
-            $ref: '#/definitions/UnexpectedError'
+        $include: ./partials/_errors.yaml
       produces:
         - application/json
   '/tagbox/rename/{id}':
@@ -146,18 +90,7 @@ paths:
           description: 'Successful API Response'
           schema:
             $ref: '#/definitions/SuccessfulAPIResponse'
-        '401':
-          description: 'Unauthorized Access'
-          schema:
-            $ref: '#/definitions/UnauthorizedError'
-        '404':
-          description: 'Unable to find Resource'
-          schema:
-            $ref: '#/definitions/NotFoundError'
-        '500':
-          description: 'Unknown Error'
-          schema:
-            $ref: '#/definitions/UnexpectedError'
+        $include: ./partials/_errors.yaml
       produces:
         - application/json
       parameters:
@@ -178,18 +111,7 @@ paths:
           description: 'Successful API Response'
           schema:
             $ref: '#/definitions/SuccessfulAPIResponse'
-        '401':
-          description: 'Unauthorized Access'
-          schema:
-            $ref: '#/definitions/UnauthorizedError'
-        '404':
-          description: 'Unable to find Resource'
-          schema:
-            $ref: '#/definitions/NotFoundError'
-        '500':
-          description: 'Unknown Error'
-          schema:
-            $ref: '#/definitions/UnexpectedError'
+        $include: ./partials/_errors.yaml
       summary: RenameTagByID
       tags:
         - Tagbox
@@ -239,18 +161,7 @@ paths:
           description: 'Successful API Response'
           schema:
             $ref: '#/definitions/SuccessfulAPIResponse'
-        '401':
-          description: 'Unauthorized Access'
-          schema:
-            $ref: '#/definitions/UnauthorizedError'
-        '404':
-          description: 'Unable to find Resource'
-          schema:
-            $ref: '#/definitions/NotFoundError'
-        '500':
-          description: 'Unknown Error'
-          schema:
-            $ref: '#/definitions/UnexpectedError'
+        $include: ./partials/_errors.yaml
       produces:
         - application/json
   '/tagbox/teach/{id}':
@@ -273,32 +184,13 @@ paths:
           description: 'Successful API Response'
           schema:
             $ref: '#/definitions/SuccessfulAPIResponse'
-        '401':
-          description: 'Unauthorized Access'
-          schema:
-            $ref: '#/definitions/UnauthorizedError'
-        '404':
-          description: 'Unable to find Resource'
-          schema:
-            $ref: '#/definitions/NotFoundError'
-        '500':
-          description: 'Unknown Error'
-          schema:
-            $ref: '#/definitions/UnexpectedError'
+        $include: ./partials/_errors.yaml
       produces:
         - application/json
       consumes:
         - application/json
 
 definitions:
-  SuccessfulAPIResponse:
-    $ref: ./definitions/SuccessfulAPIResponse.yaml
-  UnexpectedError:
-    $ref: ./definitions/UnexpectedError.yaml
-  UnauthorizedError:
-    $ref: ./definitions/UnauthorizedError.yaml
-  NotFoundError:
-    $ref: ./definitions/NotFoundError.yaml
   CheckApiResponse:
     title: CheckApiResponse
     type: object

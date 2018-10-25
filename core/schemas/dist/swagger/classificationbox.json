@@ -1,9 +1,8 @@
 {
-  "swagger": "2.0",
   "info": {
     "title": "Classificationbox",
-    "version": "1.0.1",
     "description": "ClassificationBox API descriptors (unofficial)",
+    "version": "1.0.1",
     "contact": {
       "name": "Joe Tyson",
       "url": "https://github.com/joetyson/machinebox-openapi"
@@ -12,6 +11,7 @@
       "name": "Apache License 2.0"
     }
   },
+  "swagger": "2.0",
   "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
@@ -50,28 +50,7 @@
           "200": {
             "description": "Resposne from box.",
             "schema": {
-              "name": "getBoxInfoResponse",
-              "type": "object",
-              "properties": {
-                "build": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "plan": {
-                  "type": "string"
-                },
-                "status": {
-                  "type": "string"
-                },
-                "success": {
-                  "type": "boolean"
-                },
-                "version": {
-                  "type": "number"
-                }
-              }
+              "$ref": "#/definitions/getBoxInfoOKBody"
             }
           }
         }
@@ -88,8 +67,8 @@
         }
       }
     },
-    "UnexpectedError": {
-      "title": "UnexpectedError",
+    "APIError": {
+      "title": "APIError",
       "type": "object",
       "properties": {
         "success": {
@@ -98,44 +77,30 @@
         "error": {
           "type": "string"
         }
-      },
-      "required": [
-        "success",
-        "error"
-      ]
+      }
     },
-    "UnauthorizedError": {
-      "title": "UnauthorizedError",
+    "getBoxInfoOKBody": {
       "type": "object",
       "properties": {
+        "build": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "plan": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
         "success": {
           "type": "boolean"
         },
-        "error": {
-          "type": "string"
+        "version": {
+          "type": "number"
         }
-      },
-      "required": [
-        "success",
-        "error"
-      ]
-    },
-    "NotFoundError": {
-      "title": "NotFoundError",
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean"
-        },
-        "error": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "success",
-        "error"
-      ]
+      }
     }
   }
 }
-

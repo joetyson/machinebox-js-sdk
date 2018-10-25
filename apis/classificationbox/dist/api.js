@@ -9,7 +9,7 @@
  * Classificationbox
  * ClassificationBox API descriptors (unofficial)
  *
- * OpenAPI spec version: 1.0.1
+ * @mbx/api-classificationbox v1.0.0
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const url = require("url");
@@ -81,7 +81,7 @@ exports.MetadataApiAxiosParamCreator = function (configuration) {
             }
             else {
                 localVarHeaderParameter['User-Agent'] =
-                    'Machinebox-SDK/1.0.1/javascript';
+                    'classificationbox-SDK/js/1.0.1';
             }
             // authentication basicAuth required
             // http basic authentication required

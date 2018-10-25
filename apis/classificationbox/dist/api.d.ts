@@ -6,7 +6,7 @@
  * Classificationbox
  * ClassificationBox API descriptors (unofficial)
  *
- * OpenAPI spec version: 1.0.1
+ * @mbx/api-classificationbox v1.0.0
  */
 /// <reference path="../custom.d.ts" />
 import { Configuration } from './configuration';
@@ -54,64 +54,64 @@ export declare class RequiredError extends Error {
 /**
  *
  * @export
- * @interface InlineResponse200
+ * @interface APIError
  */
-export interface InlineResponse200 {
-    /**
-     *
-     * @type {string}
-     * @memberof InlineResponse200
-     */
-    build?: string;
+export interface APIError {
     /**
      *
      * @type {boolean}
-     * @memberof InlineResponse200
+     * @memberof APIError
      */
     success?: boolean;
     /**
      *
      * @type {string}
-     * @memberof InlineResponse200
+     * @memberof APIError
+     */
+    error?: string;
+}
+/**
+ *
+ * @export
+ * @interface GetBoxInfoOKBody
+ */
+export interface GetBoxInfoOKBody {
+    /**
+     *
+     * @type {string}
+     * @memberof GetBoxInfoOKBody
+     */
+    build?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetBoxInfoOKBody
      */
     name?: string;
     /**
      *
-     * @type {number}
-     * @memberof InlineResponse200
-     */
-    version?: number;
-    /**
-     *
      * @type {string}
-     * @memberof InlineResponse200
+     * @memberof GetBoxInfoOKBody
      */
     plan?: string;
     /**
      *
      * @type {string}
-     * @memberof InlineResponse200
+     * @memberof GetBoxInfoOKBody
      */
     status?: string;
-}
-/**
- *
- * @export
- * @interface NotFoundError
- */
-export interface NotFoundError {
     /**
      *
      * @type {boolean}
-     * @memberof NotFoundError
+     * @memberof GetBoxInfoOKBody
      */
-    success: boolean;
+    success?: boolean;
     /**
      *
-     * @type {string}
-     * @memberof NotFoundError
+     * @type {number}
+     * @memberof GetBoxInfoOKBody
      */
-    error: string;
+    version?: number;
 }
 /**
  *
@@ -125,44 +125,6 @@ export interface SuccessfulAPIResponse {
      * @memberof SuccessfulAPIResponse
      */
     successs?: boolean;
-}
-/**
- *
- * @export
- * @interface UnauthorizedError
- */
-export interface UnauthorizedError {
-    /**
-     *
-     * @type {boolean}
-     * @memberof UnauthorizedError
-     */
-    success: boolean;
-    /**
-     *
-     * @type {string}
-     * @memberof UnauthorizedError
-     */
-    error: string;
-}
-/**
- *
- * @export
- * @interface UnexpectedError
- */
-export interface UnexpectedError {
-    /**
-     *
-     * @type {boolean}
-     * @memberof UnexpectedError
-     */
-    success: boolean;
-    /**
-     *
-     * @type {string}
-     * @memberof UnexpectedError
-     */
-    error: string;
 }
 /**
  * MetadataApi - axios parameter creator
@@ -188,7 +150,7 @@ export declare const MetadataApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getBoxInfo(options?: any): (basePath?: string) => AxiosPromise<InlineResponse200>;
+    getBoxInfo(options?: any): (basePath?: string) => AxiosPromise<GetBoxInfoOKBody>;
 };
 /**
  * MetadataApi - factory interface
@@ -201,7 +163,7 @@ export declare const MetadataApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getBoxInfo(options?: any): AxiosPromise<InlineResponse200>;
+    getBoxInfo(options?: any): AxiosPromise<GetBoxInfoOKBody>;
 };
 /**
  * MetadataApi - interface
@@ -216,7 +178,7 @@ export interface MetadataApiInterface {
      * @throws {RequiredError}
      * @memberof MetadataApiInterface
      */
-    getBoxInfo(options?: any): AxiosPromise<InlineResponse200>;
+    getBoxInfo(options?: any): AxiosPromise<GetBoxInfoOKBody>;
 }
 /**
  * MetadataApi - object-oriented interface
@@ -232,5 +194,5 @@ export declare class MetadataApi extends BaseAPI implements MetadataApiInterface
      * @throws {RequiredError}
      * @memberof MetadataApi
      */
-    getBoxInfo(options?: any): AxiosPromise<InlineResponse200>;
+    getBoxInfo(options?: any): AxiosPromise<GetBoxInfoOKBody>;
 }

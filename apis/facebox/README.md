@@ -4,5 +4,5 @@ This is a generated package that is part of the
 [machinebox-js-sdk](https://github.com/joetyson/machinebox-js-sdk) monorepo.
 
 
-#### {{npmName}}@{{npmVersion}}
+#### @mbx/api-facebox@1.0.0
 

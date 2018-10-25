@@ -8,7 +8,7 @@
  * Tagbox API
  * Tagbox API descriptors (unofficial)
  *
- * OpenAPI spec version: 1.0.1
+ * @mbx/api-tagbox v1.0.0
  */
 
 import * as url from 'url';
@@ -68,6 +68,26 @@ export class RequiredError extends Error {
   constructor(public field: string, msg?: string) {
     super(msg);
   }
+}
+
+/**
+ *
+ * @export
+ * @interface APIError
+ */
+export interface APIError {
+  /**
+   *
+   * @type {boolean}
+   * @memberof APIError
+   */
+  success?: boolean;
+  /**
+   *
+   * @type {string}
+   * @memberof APIError
+   */
+  error?: string;
 }
 
 /**
@@ -145,65 +165,45 @@ export interface CustomTagScore {
 /**
  *
  * @export
- * @interface InlineResponse200
+ * @interface GetBoxInfoOKBody
  */
-export interface InlineResponse200 {
+export interface GetBoxInfoOKBody {
   /**
    *
    * @type {string}
-   * @memberof InlineResponse200
+   * @memberof GetBoxInfoOKBody
    */
   build?: string;
   /**
    *
-   * @type {boolean}
-   * @memberof InlineResponse200
-   */
-  success?: boolean;
-  /**
-   *
    * @type {string}
-   * @memberof InlineResponse200
+   * @memberof GetBoxInfoOKBody
    */
   name?: string;
   /**
    *
-   * @type {number}
-   * @memberof InlineResponse200
-   */
-  version?: number;
-  /**
-   *
    * @type {string}
-   * @memberof InlineResponse200
+   * @memberof GetBoxInfoOKBody
    */
   plan?: string;
   /**
    *
    * @type {string}
-   * @memberof InlineResponse200
+   * @memberof GetBoxInfoOKBody
    */
   status?: string;
-}
-
-/**
- *
- * @export
- * @interface NotFoundError
- */
-export interface NotFoundError {
   /**
    *
    * @type {boolean}
-   * @memberof NotFoundError
+   * @memberof GetBoxInfoOKBody
    */
-  success: boolean;
+  success?: boolean;
   /**
    *
-   * @type {string}
-   * @memberof NotFoundError
+   * @type {number}
+   * @memberof GetBoxInfoOKBody
    */
-  error: string;
+  version?: number;
 }
 
 /**
@@ -359,46 +359,6 @@ export interface TeachCustomTagRequest {
 }
 
 /**
- *
- * @export
- * @interface UnauthorizedError
- */
-export interface UnauthorizedError {
-  /**
-   *
-   * @type {boolean}
-   * @memberof UnauthorizedError
-   */
-  success: boolean;
-  /**
-   *
-   * @type {string}
-   * @memberof UnauthorizedError
-   */
-  error: string;
-}
-
-/**
- *
- * @export
- * @interface UnexpectedError
- */
-export interface UnexpectedError {
-  /**
-   *
-   * @type {boolean}
-   * @memberof UnexpectedError
-   */
-  success: boolean;
-  /**
-   *
-   * @type {string}
-   * @memberof UnexpectedError
-   */
-  error: string;
-}
-
-/**
  * MetadataApi - axios parameter creator
  * @export
  */
@@ -429,8 +389,7 @@ export const MetadataApiAxiosParamCreator = function(
       if (configuration && configuration.userAgent) {
         localVarHeaderParameter['User-Agent'] = configuration.userAgent;
       } else {
-        localVarHeaderParameter['User-Agent'] =
-          'Machinebox-SDK/1.0.1/javascript';
+        localVarHeaderParameter['User-Agent'] = 'tagbox-SDK/js/1.0.1';
       }
       // authentication basicAuth required
       // http basic authentication required
@@ -476,7 +435,7 @@ export const MetadataApiFp = function(configuration?: Configuration) {
      */
     getBoxInfo(
       options?: any
-    ): (basePath?: string) => AxiosPromise<InlineResponse200> {
+    ): (basePath?: string) => AxiosPromise<GetBoxInfoOKBody> {
       const localVarAxiosArgs = MetadataApiAxiosParamCreator(
         configuration
       ).getBoxInfo(options);
@@ -524,7 +483,7 @@ export interface MetadataApiInterface {
    * @throws {RequiredError}
    * @memberof MetadataApiInterface
    */
-  getBoxInfo(options?: any): AxiosPromise<InlineResponse200>;
+  getBoxInfo(options?: any): AxiosPromise<GetBoxInfoOKBody>;
 }
 
 /**
@@ -581,8 +540,7 @@ export const TagboxApiAxiosParamCreator = function(
       if (configuration && configuration.userAgent) {
         localVarHeaderParameter['User-Agent'] = configuration.userAgent;
       } else {
-        localVarHeaderParameter['User-Agent'] =
-          'Machinebox-SDK/1.0.1/javascript';
+        localVarHeaderParameter['User-Agent'] = 'tagbox-SDK/js/1.0.1';
       }
       // authentication basicAuth required
       // http basic authentication required
@@ -653,8 +611,7 @@ export const TagboxApiAxiosParamCreator = function(
       if (configuration && configuration.userAgent) {
         localVarHeaderParameter['User-Agent'] = configuration.userAgent;
       } else {
-        localVarHeaderParameter['User-Agent'] =
-          'Machinebox-SDK/1.0.1/javascript';
+        localVarHeaderParameter['User-Agent'] = 'tagbox-SDK/js/1.0.1';
       }
       // authentication basicAuth required
       // http basic authentication required
@@ -722,8 +679,7 @@ export const TagboxApiAxiosParamCreator = function(
       if (configuration && configuration.userAgent) {
         localVarHeaderParameter['User-Agent'] = configuration.userAgent;
       } else {
-        localVarHeaderParameter['User-Agent'] =
-          'Machinebox-SDK/1.0.1/javascript';
+        localVarHeaderParameter['User-Agent'] = 'tagbox-SDK/js/1.0.1';
       }
       // authentication basicAuth required
       // http basic authentication required
@@ -799,8 +755,7 @@ export const TagboxApiAxiosParamCreator = function(
       if (configuration && configuration.userAgent) {
         localVarHeaderParameter['User-Agent'] = configuration.userAgent;
       } else {
-        localVarHeaderParameter['User-Agent'] =
-          'Machinebox-SDK/1.0.1/javascript';
+        localVarHeaderParameter['User-Agent'] = 'tagbox-SDK/js/1.0.1';
       }
       // authentication basicAuth required
       // http basic authentication required
@@ -869,8 +824,7 @@ export const TagboxApiAxiosParamCreator = function(
       if (configuration && configuration.userAgent) {
         localVarHeaderParameter['User-Agent'] = configuration.userAgent;
       } else {
-        localVarHeaderParameter['User-Agent'] =
-          'Machinebox-SDK/1.0.1/javascript';
+        localVarHeaderParameter['User-Agent'] = 'tagbox-SDK/js/1.0.1';
       }
       // authentication basicAuth required
       // http basic authentication required
@@ -934,8 +888,7 @@ export const TagboxApiAxiosParamCreator = function(
       if (configuration && configuration.userAgent) {
         localVarHeaderParameter['User-Agent'] = configuration.userAgent;
       } else {
-        localVarHeaderParameter['User-Agent'] =
-          'Machinebox-SDK/1.0.1/javascript';
+        localVarHeaderParameter['User-Agent'] = 'tagbox-SDK/js/1.0.1';
       }
       // authentication basicAuth required
       // http basic authentication required
@@ -999,8 +952,7 @@ export const TagboxApiAxiosParamCreator = function(
       if (configuration && configuration.userAgent) {
         localVarHeaderParameter['User-Agent'] = configuration.userAgent;
       } else {
-        localVarHeaderParameter['User-Agent'] =
-          'Machinebox-SDK/1.0.1/javascript';
+        localVarHeaderParameter['User-Agent'] = 'tagbox-SDK/js/1.0.1';
       }
       // authentication basicAuth required
       // http basic authentication required

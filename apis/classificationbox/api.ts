@@ -8,7 +8,7 @@
  * Classificationbox
  * ClassificationBox API descriptors (unofficial)
  *
- * OpenAPI spec version: 1.0.1
+ * @mbx/api-classificationbox v1.0.0
  */
 
 import * as url from 'url';
@@ -73,65 +73,65 @@ export class RequiredError extends Error {
 /**
  *
  * @export
- * @interface InlineResponse200
+ * @interface APIError
  */
-export interface InlineResponse200 {
-  /**
-   *
-   * @type {string}
-   * @memberof InlineResponse200
-   */
-  build?: string;
+export interface APIError {
   /**
    *
    * @type {boolean}
-   * @memberof InlineResponse200
+   * @memberof APIError
    */
   success?: boolean;
   /**
    *
    * @type {string}
-   * @memberof InlineResponse200
+   * @memberof APIError
    */
-  name?: string;
-  /**
-   *
-   * @type {number}
-   * @memberof InlineResponse200
-   */
-  version?: number;
-  /**
-   *
-   * @type {string}
-   * @memberof InlineResponse200
-   */
-  plan?: string;
-  /**
-   *
-   * @type {string}
-   * @memberof InlineResponse200
-   */
-  status?: string;
+  error?: string;
 }
 
 /**
  *
  * @export
- * @interface NotFoundError
+ * @interface GetBoxInfoOKBody
  */
-export interface NotFoundError {
-  /**
-   *
-   * @type {boolean}
-   * @memberof NotFoundError
-   */
-  success: boolean;
+export interface GetBoxInfoOKBody {
   /**
    *
    * @type {string}
-   * @memberof NotFoundError
+   * @memberof GetBoxInfoOKBody
    */
-  error: string;
+  build?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof GetBoxInfoOKBody
+   */
+  name?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof GetBoxInfoOKBody
+   */
+  plan?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof GetBoxInfoOKBody
+   */
+  status?: string;
+  /**
+   *
+   * @type {boolean}
+   * @memberof GetBoxInfoOKBody
+   */
+  success?: boolean;
+  /**
+   *
+   * @type {number}
+   * @memberof GetBoxInfoOKBody
+   */
+  version?: number;
 }
 
 /**
@@ -146,46 +146,6 @@ export interface SuccessfulAPIResponse {
    * @memberof SuccessfulAPIResponse
    */
   successs?: boolean;
-}
-
-/**
- *
- * @export
- * @interface UnauthorizedError
- */
-export interface UnauthorizedError {
-  /**
-   *
-   * @type {boolean}
-   * @memberof UnauthorizedError
-   */
-  success: boolean;
-  /**
-   *
-   * @type {string}
-   * @memberof UnauthorizedError
-   */
-  error: string;
-}
-
-/**
- *
- * @export
- * @interface UnexpectedError
- */
-export interface UnexpectedError {
-  /**
-   *
-   * @type {boolean}
-   * @memberof UnexpectedError
-   */
-  success: boolean;
-  /**
-   *
-   * @type {string}
-   * @memberof UnexpectedError
-   */
-  error: string;
 }
 
 /**
@@ -220,7 +180,7 @@ export const MetadataApiAxiosParamCreator = function(
         localVarHeaderParameter['User-Agent'] = configuration.userAgent;
       } else {
         localVarHeaderParameter['User-Agent'] =
-          'Machinebox-SDK/1.0.1/javascript';
+          'classificationbox-SDK/js/1.0.1';
       }
       // authentication basicAuth required
       // http basic authentication required
@@ -266,7 +226,7 @@ export const MetadataApiFp = function(configuration?: Configuration) {
      */
     getBoxInfo(
       options?: any
-    ): (basePath?: string) => AxiosPromise<InlineResponse200> {
+    ): (basePath?: string) => AxiosPromise<GetBoxInfoOKBody> {
       const localVarAxiosArgs = MetadataApiAxiosParamCreator(
         configuration
       ).getBoxInfo(options);
@@ -314,7 +274,7 @@ export interface MetadataApiInterface {
    * @throws {RequiredError}
    * @memberof MetadataApiInterface
    */
-  getBoxInfo(options?: any): AxiosPromise<InlineResponse200>;
+  getBoxInfo(options?: any): AxiosPromise<GetBoxInfoOKBody>;
 }
 
 /**

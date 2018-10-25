@@ -1,36 +1,4 @@
-swagger: '2.0'
+$include: ./_base.yaml
 info:
   title: Classificationbox
-  version: 1.0.1
   description: ClassificationBox API descriptors (unofficial)
-  contact:
-    name: Joe Tyson
-    url: 'https://github.com/joetyson/machinebox-openapi'
-  license:
-    name: Apache License 2.0
-host: 'localhost:8080'
-basePath: /
-schemes:
-  - http
-  - https
-securityDefinitions:
-  basicAuth:
-    type: basic
-security:
-  - basicAuth: []
-consumes:
-  - application/json
-produces:
-  - application/json
-paths:
-  /info:
-    $ref: ./paths/info.yaml
-definitions:
-  SuccessfulAPIResponse:
-    $ref: ./definitions/SuccessfulAPIResponse.yaml
-  UnexpectedError:
-    $ref: ./definitions/UnexpectedError.yaml
-  UnauthorizedError:
-    $ref: ./definitions/UnauthorizedError.yaml
-  NotFoundError:
-    $ref: ./definitions/NotFoundError.yaml

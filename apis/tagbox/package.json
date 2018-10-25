@@ -1,12 +1,12 @@
 {
-  "name": "@mbx/tagbox-api",
+  "name": "@mbx/api-tagbox",
   "version": "1.0.0",
-  "description": "OpenAPI client for @mbx/tagbox-api",
-  "author": "OpenAPI-Generator Contributors",
+  "description": "Core REST Client Tagbox API",
+  "author": "Joe Tyson @joetyson",
   "keywords": [
-    "@mbx/tagbox-api"
+    "@mbx/api-tagbox"
   ],
-  "license": "Unlicense",
+  "license": "Apache-2.0",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "scripts" : {
@@ -16,11 +16,11 @@
   "dependencies": {
     "axios": "^0.18.0"
   },
-  "peerDependencies": {    
+  "peerDependencies": {
   },
   "devDependencies": {
-    "@types/node": "^8.0.9",
-    "typescript": "^2.4" 
+    "@types/node": "^10.12.0",
+    "typescript": "^2.4"
   },
   "publishConfig":{
     "registry":"https://github.com/joetyson/machinebox-js-sdk"

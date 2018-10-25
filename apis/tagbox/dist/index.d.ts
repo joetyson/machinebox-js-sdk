@@ -6,7 +6,7 @@
  * Tagbox API
  * Tagbox API descriptors (unofficial)
  *
- * OpenAPI spec version: 1.0.1
+ * @mbx/api-tagbox v1.0.0
  */
 export * from './api';
 export * from './configuration';

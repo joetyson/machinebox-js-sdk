@@ -8,7 +8,7 @@
  * Tagbox API
  * Tagbox API descriptors (unofficial)
  *
- * OpenAPI spec version: 1.0.1
+ * @mbx/api-tagbox v1.0.0
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 class Configuration {

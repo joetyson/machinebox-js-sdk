@@ -1,0 +1,50 @@
+swagger: '2.0'
+
+info:
+  version: 1.0.1
+  contact:
+    name: Joe Tyson
+    url: 'https://github.com/joetyson/machinebox-openapi'
+  license:
+    name: Apache License 2.0
+
+host: localhost:8080
+basePath: /
+schemes:
+  - http
+  - https
+
+securityDefinitions:
+  basicAuth:
+    type: basic
+security:
+  - basicAuth: []
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /info:
+    get:
+      operationId: GetBoxInfo
+      summary: GetBoxInfo
+      description: Returns some basic details about the box.
+      tags:
+        - Metadata
+      consumes:
+        - application/json
+      responses:
+        '200':
+          description: Resposne from box.
+          schema:
+            $ref: "#/definitions/getBoxInfoOKBody"
+
+definitions:
+  SuccessfulAPIResponse:
+    $include: ./definitions/SuccessfulAPIResponse.yaml
+  APIError:
+    $include: ./definitions/APIError.yaml
+  getBoxInfoOKBody:
+    $include: ./definitions/getBoxInfoOKBody.yaml

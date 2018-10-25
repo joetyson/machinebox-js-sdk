@@ -1,9 +1,8 @@
 {
-  "swagger": "2.0",
   "info": {
     "description": "Facebox API descriptors (unofficial)",
-    "version": "1.0.1",
     "title": "Facebox API",
+    "version": "1.0.1",
     "contact": {
       "name": "Joe Tyson",
       "url": "https://github.com/joetyson/machinebox-openapi"
@@ -12,29 +11,9 @@
       "name": "Apache License 2.0"
     }
   },
-  "host": "localhost:8080",
-  "basePath": "/",
-  "schemes": [
-    "http",
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "security": [
-    {
-      "basicAuth": []
-    }
-  ],
   "paths": {
     "/facebox/check": {
       "post": {
-        "tags": [
-          "Facebox"
-        ],
         "summary": "checkImage",
         "description": "Use the /tagbox/check endpoint to get tags for a specified image.",
         "operationId": "checkImage",
@@ -44,26 +23,16 @@
         "produces": [
           "application/json"
         ],
+        "tags": [
+          "Facebox"
+        ],
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "description": "URL to image"
-                },
-                "base64": {
-                  "type": "string"
-                },
-                "faceprint": {
-                  "type": "boolean",
-                  "default": false
-                }
-              }
+              "$ref": "#/definitions/checkImageParamsBody"
             }
           }
         ],
@@ -71,7 +40,19 @@
           "200": {
             "description": "Status 200",
             "schema": {
-              "$ref": "#/definitions/checkImageResponse"
+              "$ref": "#/definitions/checkImageBody"
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Unable to find Resource"
+          },
+          "500": {
+            "description": "Unknown Error",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         }
@@ -97,7 +78,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/checkFaceprintRequest"
+              "$ref": "#/definitions/checkFaceprintParamsBody"
             }
           }
         ],
@@ -105,7 +86,19 @@
           "200": {
             "description": "Status 200",
             "schema": {
-              "$ref": "#/definitions/checkFaceprintResponse"
+              "$ref": "#/definitions/checkFaceprintBody"
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Unable to find Resource"
+          },
+          "500": {
+            "description": "Unknown Error",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         }
@@ -113,10 +106,15 @@
     },
     "/facebox/faceprint/compare": {
       "post": {
+        "tags": [
+          "Facebox"
+        ],
         "summary": "compareFaceprint",
         "description": "Compare multiple faceprints.",
         "operationId": "compareFaceprint",
-        "consumes": [],
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -126,7 +124,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/compareFaceprintRequest"
+              "$ref": "#/definitions/compareFaceprintParamsBody"
             }
           }
         ],
@@ -148,13 +146,31 @@
               }
             },
             "examples": {
-              "application/json": "{\n\t\"success\": true,\n\t\"confidences\": [\n        0.21287301029665473, \n        0.7309214023621301,\n        0.820001\n    ]\n}"
+              "application/json": {
+                "success": true,
+                "confidences": [
+                  0.21287301029665473,
+                  0.7309214023621301,
+                  0.820001
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Unable to find Resource"
+          },
+          "500": {
+            "description": "Unknown Error",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         }
       }
     },
-    "/facebox/rename": {},
     "/facebox/similar?id={id}": {
       "get": {
         "tags": [
@@ -175,7 +191,19 @@
           "200": {
             "description": "Status 200",
             "schema": {
-              "$ref": "#/definitions/getSimilarResponse"
+              "$ref": "#/definitions/getSimilarBody"
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Unable to find Resource"
+          },
+          "500": {
+            "description": "Unknown Error",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         }
@@ -197,22 +225,16 @@
         "summary": "getSimilar",
         "description": "Get similar faces to a new or unknown face",
         "operationId": "getSimilar",
-        "consumes": [],
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "url": {
-                  "type": "string"
-                },
-                "base64": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/getSimilarParamsBody"
             }
           }
         ],
@@ -220,7 +242,19 @@
           "200": {
             "description": "Status 200",
             "schema": {
-              "$ref": "#/definitions/getSimilarResponse"
+              "$ref": "#/definitions/getSimilarBody"
+            }
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Unable to find Resource"
+          },
+          "500": {
+            "description": "Unknown Error",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         }
@@ -228,23 +262,40 @@
     },
     "/facebox/teach": {
       "post": {
+        "tags": [
+          "Facebox"
+        ],
         "summary": "teach",
         "description": "Teach facebox a face",
         "operationId": "teach",
-        "consumes": [],
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/teachFaceRequest"
+              "$ref": "#/definitions/teachFaceParamsBody"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Unable to find Resource"
+          },
+          "500": {
+            "description": "Unknown Error",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         }
       }
@@ -256,28 +307,34 @@
         ],
         "summary": "rename",
         "operationId": "rename",
-        "consumes": [],
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "required": [
-                "name"
-              ],
-              "properties": {
-                "name": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/renameParamsBody"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "Status 200"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Unable to find Resource"
+          },
+          "500": {
+            "description": "Unknown Error",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         }
       },
@@ -292,13 +349,15 @@
     },
     "/info": {
       "get": {
+        "operationId": "GetBoxInfo",
+        "summary": "GetBoxInfo",
+        "description": "Returns some basic details about the box.",
         "tags": [
           "Metadata"
         ],
-        "summary": "GetBoxInfo",
-        "description": "Returns some basic details about the box.",
-        "operationId": "GetBoxInfo",
-        "parameters": [],
+        "consumes": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Resposne from box.",
@@ -308,11 +367,6 @@
           }
         }
       }
-    }
-  },
-  "securityDefinitions": {
-    "basicAuth": {
-      "type": "basic"
     }
   },
   "definitions": {
@@ -344,21 +398,6 @@
         },
         "rect": {
           "$ref": "#/definitions/Rect"
-        }
-      }
-    },
-    "NotFoundError": {
-      "type": "object",
-      "required": [
-        "error",
-        "success"
-      ],
-      "properties": {
-        "error": {
-          "type": "string"
-        },
-        "success": {
-          "type": "boolean"
         }
       }
     },
@@ -422,45 +461,7 @@
         }
       }
     },
-    "SuccessfulAPIResponse": {
-      "type": "object",
-      "properties": {
-        "successs": {
-          "type": "boolean"
-        }
-      }
-    },
-    "UnauthorizedError": {
-      "type": "object",
-      "required": [
-        "error",
-        "success"
-      ],
-      "properties": {
-        "error": {
-          "type": "string"
-        },
-        "success": {
-          "type": "boolean"
-        }
-      }
-    },
-    "UnexpectedError": {
-      "type": "object",
-      "required": [
-        "error",
-        "success"
-      ],
-      "properties": {
-        "error": {
-          "type": "string"
-        },
-        "success": {
-          "type": "boolean"
-        }
-      }
-    },
-    "checkFaceprintRequest": {
+    "checkFaceprintParamsBody": {
       "type": "object",
       "required": [
         "faceprints"
@@ -474,7 +475,91 @@
         }
       }
     },
-    "compareFaceprintRequest": {
+    "checkFaceprintBody": {
+      "type": "object",
+      "properties": {
+        "faceprints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/checkFaceprintBodyFaceprintsItems"
+          }
+        },
+        "success": {
+          "type": "boolean"
+        }
+      },
+      "example": {
+        "success": true,
+        "faceprints": [
+          {
+            "id": "j1",
+            "name": "John Lennon",
+            "matched": true,
+            "confidence": 0.982
+          },
+          {
+            "matched": false,
+            "confidence": 0
+          }
+        ]
+      }
+    },
+    "checkFaceprintBodyFaceprintsItems": {
+      "type": "object",
+      "properties": {
+        "confidence": {
+          "type": "number"
+        },
+        "id": {
+          "type": "string"
+        },
+        "matched": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "checkImageParamsBody": {
+      "type": "object",
+      "properties": {
+        "base64": {
+          "type": "string"
+        },
+        "faceprint": {
+          "type": "boolean",
+          "default": false
+        },
+        "url": {
+          "description": "URL to image",
+          "type": "string"
+        }
+      }
+    },
+    "checkImageBody": {
+      "type": "object",
+      "required": [
+        "faces",
+        "facesCount",
+        "success"
+      ],
+      "properties": {
+        "faces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Face"
+          }
+        },
+        "facesCount": {
+          "type": "number"
+        },
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "compareFaceprintParamsBody": {
       "type": "object",
       "required": [
         "faceprints",
@@ -488,6 +573,86 @@
           }
         },
         "target": {
+          "type": "string"
+        }
+      }
+    },
+    "getSimilarParamsBody": {
+      "type": "object",
+      "properties": {
+        "base64": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "getSimilarBody": {
+      "type": "object",
+      "required": [
+        "faces"
+      ],
+      "properties": {
+        "faces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SimilarFace"
+          }
+        },
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "renameParamsBody": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "teachFaceParamsBody": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "base64": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "SuccessfulAPIResponse": {
+      "title": "SuccessfulAPIResponse",
+      "type": "object",
+      "properties": {
+        "successs": {
+          "type": "boolean"
+        }
+      }
+    },
+    "APIError": {
+      "title": "APIError",
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "error": {
           "type": "string"
         }
       }
@@ -514,95 +679,29 @@
           "type": "number"
         }
       }
-    },
-    "teachFaceRequest": {
-      "type": "object",
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "base64": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "url": {
-          "type": "string"
-        }
-      }
-    },
-    "checkImageResponse": {
-      "type": "object",
-      "required": [
-        "faces",
-        "facesCount",
-        "success"
-      ],
-      "properties": {
-        "faces": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Face"
-          }
-        },
-        "success": {
-          "type": "boolean"
-        },
-        "facesCount": {
-          "type": "number"
-        }
-      }
-    },
-    "checkFaceprintResponse": {
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean"
-        },
-        "faceprints": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "matched": {
-                "type": "boolean"
-              },
-              "confidence": {
-                "type": "number"
-              }
-            }
-          }
-        }
-      },
-      "example": "{ \n\t\"success\": true, \n\t\"faceprints\": [ \n\t\t{ \"id\": \"j1\", \"name\": \"John Lennon\", \"matched\": true, \"confidence\": 0.982 },\n\t\t{ \"matched\": false, \"confidence\": 0 } \n\t]\n}"
-    },
-    "getSimilarResponse": {
-      "type": "object",
-      "required": [
-        "faces"
-      ],
-      "properties": {
-        "faces": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SimilarFace"
-          }
-        },
-        "success": {
-          "type": "boolean"
-        }
-      }
     }
-  }
+  },
+  "swagger": "2.0",
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
 }
-

@@ -20,7 +20,7 @@ export const COLLECTION_FORMATS = {
 };
 
 /**
- *  
+ *
  * @export
  * @interface RequestArgs
  */
@@ -30,7 +30,7 @@ export interface RequestArgs {
 }
 
 /**
- * 
+ *
  * @export
  * @class BaseAPI
  */
@@ -46,7 +46,7 @@ export class BaseAPI {
 };
 
 /**
- * 
+ *
  * @export
  * @class RequiredError
  * @extends {Error}
@@ -106,7 +106,7 @@ export const {{classname}}AxiosParamCreator = function (configuration?: Configur
             if (configuration && configuration.userAgent) {
               localVarHeaderParameter["User-Agent"] = configuration.userAgent;
             } else {
-              localVarHeaderParameter["User-Agent"] = "{{#httpUserAgent}}{{.}}{{/httpUserAgent}}{{^httpUserAgent}}OpenAPI-Generator{{/httpUserAgent}}/{{version}}/javascript";
+              localVarHeaderParameter["User-Agent"] = "{{#httpUserAgent}}{{.}}{{/httpUserAgent}}{{^httpUserAgent}}API{{/httpUserAgent}}/js/{{version}}";
             }
     {{#authMethods}}
             // authentication {{name}} required
@@ -229,7 +229,7 @@ export const {{classname}}AxiosParamCreator = function (configuration?: Configur
     {{#bodyParam}}
             const needsSerialization = (<any>"{{dataType}}" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.data =  needsSerialization ? JSON.stringify({{paramName}} || {}) : ({{paramName}} || "");
-    {{/bodyParam}}            
+    {{/bodyParam}}
 
             return {
                 url: url.format(localVarUrlObj),
@@ -263,7 +263,7 @@ export const {{classname}}Fp = function(configuration?: Configuration) {
             const localVarAxiosArgs = {{classname}}AxiosParamCreator(configuration).{{nickname}}({{#allParams}}{{paramName}}, {{/allParams}}options);
             return (basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
-                return axios.request(axiosRequestArgs);                
+                return axios.request(axiosRequestArgs);
             };
         },
     {{/operation}}

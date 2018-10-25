@@ -6,7 +6,7 @@
  * Classificationbox
  * ClassificationBox API descriptors (unofficial)
  *
- * OpenAPI spec version: 1.0.1
+ * @mbx/api-classificationbox v1.0.0
  */
 export interface ConfigurationParameters {
     apiKey?: string | ((name: string) => string);

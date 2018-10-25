@@ -1,9 +1,8 @@
 {
-  "swagger": "2.0",
   "info": {
     "title": "Tagbox API",
-    "version": "1.0.1",
     "description": "Tagbox API descriptors (unofficial)",
+    "version": "1.0.1",
     "contact": {
       "name": "Joe Tyson",
       "url": "https://github.com/joetyson/machinebox-openapi"
@@ -12,71 +11,7 @@
       "name": "Apache License 2.0"
     }
   },
-  "host": "localhost:8080",
-  "basePath": "/",
-  "schemes": [
-    "http",
-    "https"
-  ],
-  "securityDefinitions": {
-    "basicAuth": {
-      "type": "basic"
-    }
-  },
-  "security": [
-    {
-      "basicAuth": []
-    }
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
   "paths": {
-    "/info": {
-      "get": {
-        "operationId": "GetBoxInfo",
-        "summary": "GetBoxInfo",
-        "description": "Returns some basic details about the box.",
-        "tags": [
-          "Metadata"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Resposne from box.",
-            "schema": {
-              "name": "getBoxInfoResponse",
-              "type": "object",
-              "properties": {
-                "build": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "plan": {
-                  "type": "string"
-                },
-                "status": {
-                  "type": "string"
-                },
-                "success": {
-                  "type": "boolean"
-                },
-                "version": {
-                  "type": "number"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/tagbox/check": {
       "post": {
         "description": "Get tags for a specified image",
@@ -105,21 +40,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized Access",
-            "schema": {
-              "$ref": "#/definitions/UnauthorizedError"
-            }
+            "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Unable to find Resource",
-            "schema": {
-              "$ref": "#/definitions/NotFoundError"
-            }
+            "description": "Unable to find Resource"
           },
           "500": {
             "description": "Unknown Error",
             "schema": {
-              "$ref": "#/definitions/UnexpectedError"
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -163,21 +92,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized Access",
-            "schema": {
-              "$ref": "#/definitions/UnauthorizedError"
-            }
+            "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Unable to find Resource",
-            "schema": {
-              "$ref": "#/definitions/NotFoundError"
-            }
+            "description": "Unable to find Resource"
           },
           "500": {
             "description": "Unknown Error",
             "schema": {
-              "$ref": "#/definitions/UnexpectedError"
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -215,21 +138,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized Access",
-            "schema": {
-              "$ref": "#/definitions/UnauthorizedError"
-            }
+            "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Unable to find Resource",
-            "schema": {
-              "$ref": "#/definitions/NotFoundError"
-            }
+            "description": "Unable to find Resource"
           },
           "500": {
             "description": "Unknown Error",
             "schema": {
-              "$ref": "#/definitions/UnexpectedError"
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -257,21 +174,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized Access",
-            "schema": {
-              "$ref": "#/definitions/UnauthorizedError"
-            }
+            "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Unable to find Resource",
-            "schema": {
-              "$ref": "#/definitions/NotFoundError"
-            }
+            "description": "Unable to find Resource"
           },
           "500": {
             "description": "Unknown Error",
             "schema": {
-              "$ref": "#/definitions/UnexpectedError"
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -307,21 +218,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized Access",
-            "schema": {
-              "$ref": "#/definitions/UnauthorizedError"
-            }
+            "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Unable to find Resource",
-            "schema": {
-              "$ref": "#/definitions/NotFoundError"
-            }
+            "description": "Unable to find Resource"
           },
           "500": {
             "description": "Unknown Error",
             "schema": {
-              "$ref": "#/definitions/UnexpectedError"
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -399,21 +304,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized Access",
-            "schema": {
-              "$ref": "#/definitions/UnauthorizedError"
-            }
+            "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Unable to find Resource",
-            "schema": {
-              "$ref": "#/definitions/NotFoundError"
-            }
+            "description": "Unable to find Resource"
           },
           "500": {
             "description": "Unknown Error",
             "schema": {
-              "$ref": "#/definitions/UnexpectedError"
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -450,21 +349,15 @@
             }
           },
           "401": {
-            "description": "Unauthorized Access",
-            "schema": {
-              "$ref": "#/definitions/UnauthorizedError"
-            }
+            "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Unable to find Resource",
-            "schema": {
-              "$ref": "#/definitions/NotFoundError"
-            }
+            "description": "Unable to find Resource"
           },
           "500": {
             "description": "Unknown Error",
             "schema": {
-              "$ref": "#/definitions/UnexpectedError"
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -475,66 +368,30 @@
           "application/json"
         ]
       }
+    },
+    "/info": {
+      "get": {
+        "operationId": "GetBoxInfo",
+        "summary": "GetBoxInfo",
+        "description": "Returns some basic details about the box.",
+        "tags": [
+          "Metadata"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposne from box.",
+            "schema": {
+              "$ref": "#/definitions/getBoxInfoOKBody"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "SuccessfulAPIResponse": {
-      "title": "SuccessfulAPIResponse",
-      "type": "object",
-      "properties": {
-        "successs": {
-          "type": "boolean"
-        }
-      }
-    },
-    "UnexpectedError": {
-      "title": "UnexpectedError",
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean"
-        },
-        "error": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "success",
-        "error"
-      ]
-    },
-    "UnauthorizedError": {
-      "title": "UnauthorizedError",
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean"
-        },
-        "error": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "success",
-        "error"
-      ]
-    },
-    "NotFoundError": {
-      "title": "NotFoundError",
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean"
-        },
-        "error": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "success",
-        "error"
-      ]
-    },
     "CheckApiResponse": {
       "title": "CheckApiResponse",
       "type": "object",
@@ -714,7 +571,73 @@
         "tag"
       ],
       "title": "PatchTagRequest"
+    },
+    "SuccessfulAPIResponse": {
+      "title": "SuccessfulAPIResponse",
+      "type": "object",
+      "properties": {
+        "successs": {
+          "type": "boolean"
+        }
+      }
+    },
+    "APIError": {
+      "title": "APIError",
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "getBoxInfoOKBody": {
+      "type": "object",
+      "properties": {
+        "build": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "plan": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        },
+        "version": {
+          "type": "number"
+        }
+      }
     }
-  }
+  },
+  "swagger": "2.0",
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
 }
-

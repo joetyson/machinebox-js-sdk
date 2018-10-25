@@ -1,10 +1,10 @@
 {
-  "name": "@mbx/api-classificationbox",
+  "name": "@mbx/api-facebox",
   "version": "1.0.0",
-  "description": "Core REST Client Classificationbox",
+  "description": "Core REST Client Facebox API",
   "author": "Joe Tyson @joetyson",
   "keywords": [
-    "@mbx/api-classificationbox"
+    "@mbx/api-facebox"
   ],
   "license": "Apache-2.0",
   "main": "./dist/index.js",

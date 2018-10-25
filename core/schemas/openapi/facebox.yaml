@@ -1,30 +1,10 @@
----
-swagger: "2.0"
+$include: './_base.yaml'
 info:
   description: "Facebox API descriptors (unofficial)"
-  version: "1.0.1"
   title: "Facebox API"
-  contact:
-    name: "Joe Tyson"
-    url: "https://github.com/joetyson/machinebox-openapi"
-  license:
-    name: "Apache License 2.0"
-host: "localhost:8080"
-basePath: "/"
-schemes:
-- "http"
-- "https"
-consumes:
-- "application/json"
-produces:
-- "application/json"
-security:
-- basicAuth: []
 paths:
   /facebox/check:
     post:
-      tags:
-      - "Facebox"
       summary: "checkImage"
       description: "Use the /tagbox/check endpoint to get tags for a specified image."
       operationId: "checkImage"
@@ -32,26 +12,20 @@ paths:
       - "application/json"
       produces:
       - "application/json"
+      tags:
+        - "Facebox"
       parameters:
       - name: "body"
         in: "body"
         required: true
         schema:
-          type: "object"
-          properties:
-            url:
-              type: "string"
-              description: "URL to image"
-            base64:
-              type: "string"
-            faceprint:
-              type: "boolean"
-              default: false
+          $ref: "#/definitions/checkImageParamsBody"
       responses:
         200:
           description: "Status 200"
           schema:
-            $ref: "#/definitions/checkImageResponse"
+            $ref: "#/definitions/checkImageBody"
+        $include: ./partials/_errors.yaml
   /facebox/faceprint/check:
     post:
       tags:
@@ -68,18 +42,21 @@ paths:
         in: "body"
         required: true
         schema:
-          $ref: "#/definitions/checkFaceprintRequest"
+          $ref: "#/definitions/checkFaceprintParamsBody"
       responses:
         200:
           description: "Status 200"
           schema:
-            $ref: "#/definitions/checkFaceprintResponse"
+            $ref: "#/definitions/checkFaceprintBody"
+        $include: ./partials/_errors.yaml
   /facebox/faceprint/compare:
     post:
+      tags:
+      - "Facebox"
       summary: "compareFaceprint"
       description: "Compare multiple faceprints."
       operationId: "compareFaceprint"
-      consumes: []
+      consumes: ['application/json']
       produces:
       - "application/json"
       parameters:
@@ -87,7 +64,7 @@ paths:
         in: "body"
         required: true
         schema:
-          $ref: "#/definitions/compareFaceprintRequest"
+          $ref: "#/definitions/compareFaceprintParamsBody"
       responses:
         200:
           description: "Status 200"
@@ -101,10 +78,9 @@ paths:
                 items:
                   type: "number"
           examples:
-            application/json: "{\n\t\"success\": true,\n\t\"confidences\": [\n   \
-              \     0.21287301029665473, \n        0.7309214023621301,\n        0.820001\n\
-              \    ]\n}"
-  /facebox/rename: {}
+            application/json:
+              $include: './examples/facebox/compareFaceprintBody.json'
+        $include: ./partials/_errors.yaml
   /facebox/similar?id={id}:
     get:
       tags:
@@ -121,7 +97,8 @@ paths:
         200:
           description: "Status 200"
           schema:
-            $ref: "#/definitions/getSimilarResponse"
+            $ref: "#/definitions/getSimilarBody"
+        $include: ./partials/_errors.yaml
     parameters:
     - name: "id"
       in: "path"
@@ -134,272 +111,228 @@ paths:
       summary: "getSimilar"
       description: "Get similar faces to a new or unknown face"
       operationId: "getSimilar"
-      consumes: []
+      consumes: ['application/json']
       parameters:
       - name: "body"
         in: "body"
         required: true
         schema:
-          type: "object"
-          properties:
-            url:
-              type: "string"
-            base64:
-              type: "string"
+          $ref: "#/definitions/getSimilarParamsBody"
       responses:
         200:
           description: "Status 200"
           schema:
-            $ref: "#/definitions/getSimilarResponse"
+            $ref: "#/definitions/getSimilarBody"
+        $include: ./partials/_errors.yaml
   /facebox/teach:
     post:
+      tags:
+      - "Facebox"
       summary: "teach"
       description: "Teach facebox a face"
       operationId: "teach"
-      consumes: []
+      consumes: ['application/json']
       parameters:
       - name: "body"
         in: "body"
         required: true
         schema:
-          $ref: "#/definitions/teachFaceRequest"
+          $ref: "#/definitions/teachFaceParamsBody"
       responses:
         200:
           description: "Success"
+        $include: ./partials/_errors.yaml
   /facebox/teach/{id}:
     post:
       tags:
       - "Facebox"
       summary: "rename"
       operationId: "rename"
-      consumes: []
+      consumes: ['application/json']
       parameters:
       - name: "body"
         in: "body"
         required: true
         schema:
-          type: "object"
-          required:
-          - "name"
-          properties:
-            name:
-              type: "string"
+          $ref: "#/definitions/renameParamsBody"
       responses:
         200:
           description: "Status 200"
+        $include: ./partials/_errors.yaml
     parameters:
     - name: "id"
       in: "path"
       required: true
       type: "string"
-  /info:
-    get:
-      tags:
-      - "Metadata"
-      summary: "GetBoxInfo"
-      description: "Returns some basic details about the box."
-      operationId: "GetBoxInfo"
-      parameters: []
-      responses:
-        200:
-          description: "Resposne from box."
-          schema:
-            $ref: "#/definitions/getBoxInfoOKBody"
-securityDefinitions:
-  basicAuth:
-    type: "basic"
+
 definitions:
   Face:
-    type: "object"
+    type: object
     required:
-    - "confidence"
-    - "faceprint"
-    - "id"
-    - "matched"
-    - "name"
-    - "rect"
+    - confidence
+    - faceprint
+    - id
+    - matched
+    - name
+    - rect
     properties:
       confidence:
-        type: "number"
+        type: number
       faceprint:
-        type: "string"
+        type: string
       id:
-        type: "string"
+        type: string
       matched:
-        type: "boolean"
+        type: boolean
       name:
-        type: "string"
+        type: string
       rect:
-        $ref: "#/definitions/Rect"
-  NotFoundError:
-    type: "object"
-    required:
-    - "error"
-    - "success"
-    properties:
-      error:
-        type: "string"
-      success:
-        type: "boolean"
+        $ref: '#/definitions/Rect'
   Rect:
-    type: "object"
+    type: object
     required:
-    - "height"
-    - "left"
-    - "top"
-    - "width"
+    - height
+    - left
+    - top
+    - width
     properties:
       height:
-        type: "integer"
+        type: integer
       left:
-        type: "integer"
+        type: integer
       top:
-        type: "integer"
+        type: integer
       width:
-        type: "integer"
+        type: integer
   Similar:
-    type: "object"
+    type: object
     required:
-    - "confidence"
-    - "id"
-    - "name"
+    - confidence
+    - id
+    - name
     properties:
       confidence:
-        type: "number"
+        type: number
       id:
-        type: "string"
+        type: string
       name:
-        type: "string"
+        type: string
   SimilarFace:
-    type: "object"
+    type: object
     required:
-    - "rect"
-    - "similar_faces"
+    - rect
+    - similar_faces
     properties:
       rect:
-        $ref: "#/definitions/Rect"
+        $ref: '#/definitions/Rect'
       similar_faces:
-        type: "array"
+        type: array
         items:
-          $ref: "#/definitions/Similar"
-  SuccessfulAPIResponse:
-    type: "object"
-    properties:
-      successs:
-        type: "boolean"
-  UnauthorizedError:
-    type: "object"
+          $ref: '#/definitions/Similar'
+  checkFaceprintParamsBody:
+    type: object
     required:
-    - "error"
-    - "success"
-    properties:
-      error:
-        type: "string"
-      success:
-        type: "boolean"
-  UnexpectedError:
-    type: "object"
-    required:
-    - "error"
-    - "success"
-    properties:
-      error:
-        type: "string"
-      success:
-        type: "boolean"
-  checkFaceprintRequest:
-    type: "object"
-    required:
-    - "faceprints"
+    - faceprints
     properties:
       faceprints:
-        type: "array"
+        type: array
         items:
-          type: "string"
-  compareFaceprintRequest:
-    type: "object"
-    required:
-    - "faceprints"
-    - "target"
+          type: string
+  checkFaceprintBody:
+    type: object
     properties:
       faceprints:
-        type: "array"
+        type: array
         items:
-          type: "string"
-      target:
-        type: "string"
-  getBoxInfoOKBody:
-    type: "object"
+          $ref: '#/definitions/checkFaceprintBodyFaceprintsItems'
+      success:
+        type: boolean
+    example:
+      $include: './examples/facebox/checkFaceprintBody.json'
+  checkFaceprintBodyFaceprintsItems:
+    type: object
     properties:
-      build:
-        type: "string"
+      confidence:
+        type: number
+      id:
+        type: string
+      matched:
+        type: boolean
       name:
-        type: "string"
-      plan:
-        type: "string"
-      status:
-        type: "string"
-      success:
-        type: "boolean"
-      version:
-        type: "number"
-  teachFaceRequest:
-    type: "object"
-    required:
-    - "name"
+        type: string
+  checkImageParamsBody:
+    type: object
     properties:
       base64:
-        type: "string"
-      id:
-        type: "string"
-      name:
-        type: "string"
+        type: string
+      faceprint:
+        type: boolean
+        default: false
       url:
-        type: "string"
-  checkImageResponse:
-    type: "object"
+        description: URL to image
+        type: string
+  checkImageBody:
+    type: object
     required:
-    - "faces"
-    - "facesCount"
-    - "success"
+    - faces
+    - facesCount
+    - success
     properties:
       faces:
-        type: "array"
+        type: array
         items:
-          $ref: "#/definitions/Face"
-      success:
-        type: "boolean"
+          $ref: '#/definitions/Face'
       facesCount:
-        type: "number"
-  checkFaceprintResponse:
-    type: "object"
-    properties:
+        type: number
       success:
-        type: "boolean"
-      faceprints:
-        type: "array"
-        items:
-          type: "object"
-          properties:
-            id:
-              type: "string"
-            name:
-              type: "string"
-            matched:
-              type: "boolean"
-            confidence:
-              type: "number"
-    example: "{ \n\t\"success\": true, \n\t\"faceprints\": [ \n\t\t{ \"id\": \"j1\"\
-      , \"name\": \"John Lennon\", \"matched\": true, \"confidence\": 0.982 },\n\t\
-      \t{ \"matched\": false, \"confidence\": 0 } \n\t]\n}"
-  getSimilarResponse:
-    type: "object"
+        type: boolean
+  compareFaceprintParamsBody:
+    type: object
     required:
-    - "faces"
+    - faceprints
+    - target
+    properties:
+      faceprints:
+        type: array
+        items:
+          type: string
+      target:
+        type: string
+  getSimilarParamsBody:
+    type: object
+    properties:
+      base64:
+        type: string
+      url:
+        type: string
+  getSimilarBody:
+    type: object
+    required:
+    - faces
     properties:
       faces:
-        type: "array"
+        type: array
         items:
-          $ref: "#/definitions/SimilarFace"
+          $ref: '#/definitions/SimilarFace'
       success:
-        type: "boolean"
+        type: boolean
+  renameParamsBody:
+    type: object
+    required:
+    - name
+    properties:
+      name:
+        type: string
+  teachFaceParamsBody:
+    type: object
+    required:
+    - name
+    properties:
+      base64:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      url:
+        type: string
